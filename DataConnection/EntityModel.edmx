@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="DBForTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CalculationHistory">
+          <Key>
+            <PropertyRef Name="CalcID" />
+          </Key>
+          <Property Name="CalcID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Field1" Type="float" />
+          <Property Name="Field2" Type="float" />
+          <Property Name="OperationID" Type="int" />
+          <Property Name="Result" Type="float" />
+          <Property Name="CalcDate" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Operations">
+          <Key>
+            <PropertyRef Name="OperationID" />
+          </Key>
+          <Property Name="OperationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OperationName" Type="nvarchar" MaxLength="50" />
+          <Property Name="OperationValue" Type="char" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK_CalculationHistory_Operations">
+          <End Role="Operations" Type="Self.Operations" Multiplicity="0..1" />
+          <End Role="CalculationHistory" Type="Self.CalculationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operations">
+              <PropertyRef Name="OperationID" />
+            </Principal>
+            <Dependent Role="CalculationHistory">
+              <PropertyRef Name="OperationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DBForTestModelStoreContainer">
+          <EntitySet Name="CalculationHistory" EntityType="Self.CalculationHistory" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Operations" EntityType="Self.Operations" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CalculationHistory_Operations" Association="Self.FK_CalculationHistory_Operations">
+            <End Role="Operations" EntitySet="Operations" />
+            <End Role="CalculationHistory" EntitySet="CalculationHistory" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DBForTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="DBForTestEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CalculationHistories" EntityType="DBForTestModel.CalculationHistory" />
+          <EntitySet Name="Operations" EntityType="DBForTestModel.Operation" />
+          <AssociationSet Name="FK_CalculationHistory_Operations" Association="DBForTestModel.FK_CalculationHistory_Operations">
+            <End Role="Operation" EntitySet="Operations" />
+            <End Role="CalculationHistory" EntitySet="CalculationHistories" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="CalculationHistory">
+          <Key>
+            <PropertyRef Name="CalcID" />
+          </Key>
+          <Property Name="CalcID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Field1" Type="Double" />
+          <Property Name="Field2" Type="Double" />
+          <Property Name="OperationID" Type="Int32" />
+          <Property Name="Result" Type="Double" />
+          <Property Name="CalcDate" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Operation" Relationship="DBForTestModel.FK_CalculationHistory_Operations" FromRole="CalculationHistory" ToRole="Operation" />
+        </EntityType>
+        <EntityType Name="Operation">
+          <Key>
+            <PropertyRef Name="OperationID" />
+          </Key>
+          <Property Name="OperationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OperationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="OperationValue" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+          <NavigationProperty Name="CalculationHistories" Relationship="DBForTestModel.FK_CalculationHistory_Operations" FromRole="Operation" ToRole="CalculationHistory" />
+        </EntityType>
+        <Association Name="FK_CalculationHistory_Operations">
+          <End Type="DBForTestModel.Operation" Role="Operation" Multiplicity="0..1" />
+          <End Type="DBForTestModel.CalculationHistory" Role="CalculationHistory" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Operation">
+              <PropertyRef Name="OperationID" />
+            </Principal>
+            <Dependent Role="CalculationHistory">
+              <PropertyRef Name="OperationID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DBForTestModelStoreContainer" CdmEntityContainer="DBForTestEntities">
+          <EntitySetMapping Name="CalculationHistories">
+            <EntityTypeMapping TypeName="DBForTestModel.CalculationHistory">
+              <MappingFragment StoreEntitySet="CalculationHistory">
+                <ScalarProperty Name="CalcDate" ColumnName="CalcDate" />
+                <ScalarProperty Name="Result" ColumnName="Result" />
+                <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+                <ScalarProperty Name="Field2" ColumnName="Field2" />
+                <ScalarProperty Name="Field1" ColumnName="Field1" />
+                <ScalarProperty Name="CalcID" ColumnName="CalcID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Operations">
+            <EntityTypeMapping TypeName="DBForTestModel.Operation">
+              <MappingFragment StoreEntitySet="Operations">
+                <ScalarProperty Name="OperationValue" ColumnName="OperationValue" />
+                <ScalarProperty Name="OperationName" ColumnName="OperationName" />
+                <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

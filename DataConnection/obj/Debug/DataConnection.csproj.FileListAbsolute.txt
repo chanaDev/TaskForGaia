@@ -1,0 +1,12 @@
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\bin\Debug\DataConnection.exe.config
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\bin\Debug\DataConnection.exe
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\bin\Debug\DataConnection.pdb
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\bin\Debug\EntityFramework.dll
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\bin\Debug\EntityFramework.xml
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\obj\Debug\DataConnection.csprojAssemblyReference.cache
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\obj\Debug\DataConnection.csproj.CoreCompileInputs.cache
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\obj\Debug\DataConnection.csproj.CopyComplete
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\obj\Debug\DataConnection.exe
+C:\Users\Acer\Documents\API for test\DataConnection\DataConnection\obj\Debug\DataConnection.pdb

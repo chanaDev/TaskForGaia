@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBForTestModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DBForTestEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="CalculationHistories" EntityType="DBForTestModel.CalculationHistory" />
+    <EntitySet Name="Operations" EntityType="DBForTestModel.Operation" />
+    <AssociationSet Name="FK_CalculationHistory_Operations" Association="DBForTestModel.FK_CalculationHistory_Operations">
+      <End Role="Operation" EntitySet="Operations" />
+      <End Role="CalculationHistory" EntitySet="CalculationHistories" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="CalculationHistory">
+    <Key>
+      <PropertyRef Name="CalcID" />
+    </Key>
+    <Property Name="CalcID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Field1" Type="Double" />
+    <Property Name="Field2" Type="Double" />
+    <Property Name="OperationID" Type="Int32" />
+    <Property Name="Result" Type="Double" />
+    <Property Name="CalcDate" Type="DateTime" Precision="3" />
+    <NavigationProperty Name="Operation" Relationship="DBForTestModel.FK_CalculationHistory_Operations" FromRole="CalculationHistory" ToRole="Operation" />
+  </EntityType>
+  <EntityType Name="Operation">
+    <Key>
+      <PropertyRef Name="OperationID" />
+    </Key>
+    <Property Name="OperationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="OperationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="OperationValue" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <NavigationProperty Name="CalculationHistories" Relationship="DBForTestModel.FK_CalculationHistory_Operations" FromRole="Operation" ToRole="CalculationHistory" />
+  </EntityType>
+  <Association Name="FK_CalculationHistory_Operations">
+    <End Type="DBForTestModel.Operation" Role="Operation" Multiplicity="0..1" />
+    <End Type="DBForTestModel.CalculationHistory" Role="CalculationHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operation">
+        <PropertyRef Name="OperationID" />
+      </Principal>
+      <Dependent Role="CalculationHistory">
+        <PropertyRef Name="OperationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBForTestModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CalculationHistory">
+    <Key>
+      <PropertyRef Name="CalcID" />
+    </Key>
+    <Property Name="CalcID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Field1" Type="float" />
+    <Property Name="Field2" Type="float" />
+    <Property Name="OperationID" Type="int" />
+    <Property Name="Result" Type="float" />
+    <Property Name="CalcDate" Type="datetime" />
+  </EntityType>
+  <EntityType Name="Operations">
+    <Key>
+      <PropertyRef Name="OperationID" />
+    </Key>
+    <Property Name="OperationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="OperationName" Type="nvarchar" MaxLength="50" />
+    <Property Name="OperationValue" Type="char" MaxLength="1" />
+  </EntityType>
+  <Association Name="FK_CalculationHistory_Operations">
+    <End Role="Operations" Type="Self.Operations" Multiplicity="0..1" />
+    <End Role="CalculationHistory" Type="Self.CalculationHistory" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Operations">
+        <PropertyRef Name="OperationID" />
+      </Principal>
+      <Dependent Role="CalculationHistory">
+        <PropertyRef Name="OperationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBForTestModelStoreContainer">
+    <EntitySet Name="CalculationHistory" EntityType="Self.CalculationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Operations" EntityType="Self.Operations" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CalculationHistory_Operations" Association="Self.FK_CalculationHistory_Operations">
+      <End Role="Operations" EntitySet="Operations" />
+      <End Role="CalculationHistory" EntitySet="CalculationHistory" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

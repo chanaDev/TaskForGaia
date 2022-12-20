@@ -1,0 +1,26 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DBForTestModelStoreContainer" CdmEntityContainer="DBForTestEntities">
+    <EntitySetMapping Name="CalculationHistories">
+      <EntityTypeMapping TypeName="DBForTestModel.CalculationHistory">
+        <MappingFragment StoreEntitySet="CalculationHistory">
+          <ScalarProperty Name="CalcDate" ColumnName="CalcDate" />
+          <ScalarProperty Name="Result" ColumnName="Result" />
+          <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+          <ScalarProperty Name="Field2" ColumnName="Field2" />
+          <ScalarProperty Name="Field1" ColumnName="Field1" />
+          <ScalarProperty Name="CalcID" ColumnName="CalcID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Operations">
+      <EntityTypeMapping TypeName="DBForTestModel.Operation">
+        <MappingFragment StoreEntitySet="Operations">
+          <ScalarProperty Name="OperationValue" ColumnName="OperationValue" />
+          <ScalarProperty Name="OperationName" ColumnName="OperationName" />
+          <ScalarProperty Name="OperationID" ColumnName="OperationID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
